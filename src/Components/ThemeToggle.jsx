@@ -3,7 +3,7 @@ import { Sun, Moon } from 'lucide-react';
 import { cn } from '../lib/utils/'; 
 
 export const ThemeToggle = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [isDarkMode, setIsDarkMode] = useState(true);
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -18,14 +18,17 @@ export const ThemeToggle = () => {
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('theme');
-        if (storedTheme === 'dark') {
-            setIsDarkMode(true);
-            document.documentElement.classList.add('dark');
-        } else {
+        if (storedTheme === 'light') {
             setIsDarkMode(false);
             document.documentElement.classList.remove('dark');
-        }}, []);
-    const toggleTheme = () => {
+        } else {
+            setIsDarkMode(true);
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    }, []);
+
+    const onClick = () => {
         if (isDarkMode) {
             setIsDarkMode(false);
             document.documentElement.classList.remove('dark');
@@ -38,11 +41,22 @@ export const ThemeToggle = () => {
     };
 
     return (
-        <button onClick={toggleTheme} className={cn(
-            'fixed-top-5 md:fixed top-0 right-12 md:right-5 z-50 p-2 py-7 transition-all duration-300',
-            isScrolled ? 'md:py-3  bg-background/80 backdrop-blur-md shadow-xs' : 'md:py-5 py-7',
-            'focus:outline-hidden')}>
-            {isDarkMode ? <Sun className='h-6 w-6 text-yellow-300' /> : <Moon className='h-6 w-6 text-blue-900' />}
+        <button 
+            onClick={onClick} 
+            className={cn(
+                'fixed z-50 p-2 transition-all duration-300',
+                'min-w-[44px] min-h-[44px] flex items-center justify-center',
+                ' left-4 md:right-4 md:left-auto',
+                // isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm',
+                isScrolled ? "md:py-3 top-1.5" : "md:py-4 top-2",
+                
+            )}
+        >
+            {isDarkMode ? (
+                <Sun className='h-5 w-5 text-yellow-300' />
+            ) : (
+                <Moon className='h-5 w-5 text-blue-900' />
+            )}
         </button>
     );
 };
