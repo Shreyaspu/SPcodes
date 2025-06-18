@@ -154,13 +154,15 @@ export const ContactSection = () => {
                   <Linkedin />
                 </a>
                 <a
-                  href=""
+                  href="https://x.com/pujara_shreyass"
+                  target="_blank"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Twitter />
                 </a>
                 <a
                   href="https://www.instagram.com/pujarashreyas/?igsh=OGxlODk4bmI4em5x&utm_source=qr#"
+                  target="_blank"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   <Instagram />

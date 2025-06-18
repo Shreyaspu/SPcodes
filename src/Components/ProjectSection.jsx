@@ -11,28 +11,28 @@ const projects = [
       "A modern tech company landing page designed for Togglesoft, showcasing a clean, gradient-driven UI with bold typography. It emphasizes speed and reliability with a minimal layout and a dynamic 3D graphic for visual appeal.",
     image: project1Image,
     tags: ["React", "TailwindCSS"],
-    demoURL: "#",
-    githubUrl: "#",
+    demoURL: "https://my-project-bay-xi.vercel.app/",
+    githubUrl: "https://github.com/Shreyaspu/my-project",
   },
   {
     id: 2,
-    title: "Fama Barbershop Website",
-    description:
-      "A responsive business website for Fama Barbershop. The design combines rich imagery with bold yellow accents to highlight key information like contact details, reviews, and service hours.",
-    image: project2Image,
-    tags: ["React", "TailwindCSS"],
-    demoURL: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 3,
     title: "NewsDog - News Portal",
     description:
       "A dynamic and content-rich news portal UI for NewsDog, focused on business and tech headlines. It features a card-based layout with clear publication sources, timestamps, and easy navigation. ",
     image: project3Image,
-    tags: ["React", "TailwindCSS"],
-    demoURL: "#",
-    githubUrl: "#",
+    tags: ["React", "Bootsrap"],
+    demoURL: "https://news-dog.vercel.app/",
+    githubUrl: "https://github.com/Shreyaspu/NewsDog",
+  },
+  {
+    id: 3,
+    title: "Fama Barbershop Website",
+    description:
+      "A responsive business website for Fama Barbershop. The design combines rich imagery with bold yellow accents to highlight key information like contact details, reviews, and service hours.",
+    image: project2Image,
+    tags: ["Wordpress"],
+    demoURL: "https://barbershop-landing-pagee.vercel.app/",
+    githubUrl: "https://github.com/Shreyaspu/Barbershop-landing-pagee",
   },
 ];
 
@@ -82,12 +82,14 @@ export const ProjectSection = () => {
                   <div className="flex space-x-3">
                     <a
                       href={project.demoURL}
+                      target="_blank"
                       className="text-foreground/80 hover:text-primary transition-colors duration-300"
                     >
                       <ExternalLink size={20} />
                     </a>
                     <a
                       href={project.githubUrl}
+                      target="_blank"
                       className="text-foreground/80 hover:text-primary transition-colors duration-300"
                     >
                       <Github size={20} />
