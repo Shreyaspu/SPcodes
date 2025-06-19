@@ -18,13 +18,12 @@ export const ThemeToggle = () => {
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('theme');
-        if (storedTheme === 'light') {
-            setIsDarkMode(false);
-            document.documentElement.classList.remove('dark');
-        } else {
+        if (storedTheme === 'dark') {
             setIsDarkMode(true);
             document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
+        } else {
+            setIsDarkMode(false);
+            document.documentElement.classList.remove('dark');
         }
     }, []);
 
@@ -44,7 +43,7 @@ export const ThemeToggle = () => {
         <button 
             onClick={onClick} 
             className={cn(
-                'fixed z-50 p-2 pt-5.5 transition-all duration-300',
+                'fixed z-50 p-2 pt-5 transition-all duration-300',
                 'min-w-[44px] min-h-[44px] flex items-center justify-center',
                 ' left-4 md:right-4 md:left-auto',
                 // isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm',

@@ -40,8 +40,8 @@ export const Navbar = () => {
   return (
     <nav
       className={cn(
-        "fixed top-0 w-full z-40 transition-all duration-300 py-3 md:py-5 ", 
-        isScrolled ? "md:py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
+        "fixed top-0 w-full z-40 transition-all duration-300 py-3 md:py-5 bg-background/20 dark:bg-black",
+        isScrolled ? "md:py-3 bg-black/90 dark:bg-black/90 backdrop-blur-md shadow-xs" : "py-5"
       )}
     >
       <div className="container flex items-center justify-between space-around ml-4">
@@ -50,7 +50,7 @@ export const Navbar = () => {
           href="#hero"
         >
           <span className="relative z-10">
-            <span className="text-glow text-foreground ml-4">SP</span>
+            <span className="text-glow text-white ml-4">SP</span>
             codes
           </span>
         </a>
@@ -61,7 +61,7 @@ export const Navbar = () => {
             <a
               key={key}
               href={item.path}
-              className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-pointer"
+              className="text-white/80 hover:text-primary transition-colors duration-300 cursor-pointer"
             >
               {item.name}
             </a>
