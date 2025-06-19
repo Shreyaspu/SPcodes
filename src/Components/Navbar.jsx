@@ -24,20 +24,33 @@ export const Navbar = () => {
     };
   }, []);
 
+  // Prevent background scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      window.scrollTo({ top: 0 }); // Scroll to top when menu opens
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   return (
     <nav
       className={cn(
-        "fixed top-0 w-full z-40 transition-all duration-300  md:py-5 ", 
-        isScrolled ? "md:py-3 py-1 bg-background/80 backdrop-blur-md shadow-xs" : "py-2"
+        "fixed top-0 w-full z-40 transition-all duration-300 py-3 md:py-5 ", 
+        isScrolled ? "md:py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
       )}
     >
-      <div className="container flex items-center justify-between ml-4">
+      <div className="container flex items-center justify-between space-around ml-4">
         <a
           className="text-xl font-bold text-primary flex items-center"
           href="#hero"
         >
-          <span className=" ml-8 relative z-10">
-            <span className="text-glow text-foreground"> SP</span>
+          <span className="relative z-10">
+            <span className="text-glow text-foreground ml-4">SP</span>
             codes
           </span>
         </a>
@@ -47,7 +60,7 @@ export const Navbar = () => {
           {navItems.map((item, key) => (
             <a
               key={key}
-              href={item.path} // also fix: should be item.path, not item.href
+              href={item.path}
               className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-pointer"
             >
               {item.name}
@@ -56,29 +69,40 @@ export const Navbar = () => {
         </div>
 
         {/* mobile nav */}
-
-        <button onClick={() => setIsMenuOpen((prev) => !prev)}
+        {/* Only show menu button in navbar when menu is closed */}
+        {!isMenuOpen && (
+          <button onClick={() => setIsMenuOpen(true)}
             className="md:hidden p-2 text-foreground z-50"
-            aria-label="Toggle Menu"> 
-            {isMenuOpen ? <X size={24} /> : <Menu size={24}/> }</button>
-
-        <div className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur--md z-40 flex flex-col items-center justify-center",
-            "transition-all duration-300 md:hidden",
-            isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 "
-            )}>
-         <div className="flex flex-col space-y-8 text-xl">
+            aria-label="Open Menu">
+            <Menu size={24}/>
+          </button>
+        )}
+      </div>
+      {/* Mobile menu overlay moved outside container */}
+      <div className={cn(
+          "fixed top-0 left-0 w-screen h-screen bg-background/95 backdrop-blur-md z-[9999] flex flex-col items-center justify-center",
+          "transition-all duration-300 md:hidden",
+          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        )}>
+        {/* X button inside overlay */}
+        {isMenuOpen && (
+          <button onClick={() => setIsMenuOpen(false)}
+            className="absolute top-6 right-6 p-2 text-foreground z-[10000]"
+            aria-label="Close Menu">
+            <X size={28}/>
+          </button>
+        )}
+        <div className="flex flex-col space-y-8 text-xl">
           {navItems.map((item, key) => (
             <a
               key={key}
-              href={item.path} // also fix: should be item.path, not item.href
+              href={item.path}
               className="text-foreground/80 hover:text-primary transition-colors duration-300 cursor-pointer"
               onClick={() => setIsMenuOpen(false)}
             >
               {item.name}
             </a>
           ))}
-        </div>
         </div>
       </div>
     </nav>
